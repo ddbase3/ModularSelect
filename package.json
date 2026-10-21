@@ -1,0 +1,13 @@
+{
+  "name": "modularselect",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Accessible, domain-neutral select component for static and paginated asynchronous options.",
+  "scripts": {
+    "serve": "python3 -m http.server 8000",
+    "smoke": "node tests/node-smoke/smoke.mjs"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

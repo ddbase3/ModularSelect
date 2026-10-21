@@ -1,0 +1,238 @@
+/* ModularSelect: scoped, dependency-free styles aligned with ChronoPicker. */
+.mselect-root {
+	--mselect-border: #cfcfcf;
+	--mselect-focus: #225cb0;
+	--mselect-active: #eef3f8;
+	position: relative;
+	box-sizing: border-box;
+	width: 100%;
+	min-width: 0;
+	color: #222;
+	font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+	font-size: 13px;
+	line-height: 1.35;
+}
+
+.mselect-root *,
+.mselect-root *::before,
+.mselect-root *::after { box-sizing: border-box; }
+
+.mselect-root [hidden] { display: none !important; }
+
+/* Keep keyboard instructions and removal feedback available to screen readers. */
+.mselect-visually-hidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+	border: 0;
+}
+
+.mselect-label {
+	display: block;
+	margin: 0 0 5px;
+	color: #333;
+	font-weight: 600;
+}
+
+/* Keep the input and toggle anchored to the same row, even for long labels. */
+.mselect-control {
+	display: flex;
+	flex-wrap: nowrap;
+	align-items: center;
+	gap: 5px;
+	min-width: 0;
+	min-height: 36px;
+	padding: 3px 4px 3px 7px;
+	border: 1px solid var(--mselect-border);
+	border-radius: 4px;
+	background: #fff;
+}
+
+.mselect-control:focus-within {
+	outline: 2px solid var(--mselect-focus);
+	outline-offset: 1px;
+}
+
+/* Multi-select chips scroll horizontally instead of moving the toggle below. */
+.mselect-chips {
+	display: flex;
+	flex: 0 1 auto;
+	flex-wrap: nowrap;
+	align-items: center;
+	gap: 4px;
+	min-width: 0;
+	max-width: 100%;
+	overflow-x: auto;
+	overflow-y: hidden;
+	overscroll-behavior-inline: contain;
+	scrollbar-width: thin;
+}
+
+.mselect-chip {
+	display: inline-flex;
+	flex: 0 0 auto;
+	align-items: center;
+	gap: 5px;
+	min-width: 0;
+	max-width: 100%;
+	padding: 2px 3px 2px 7px;
+	border: 1px solid #d5dfeb;
+	border-radius: 4px;
+	background: #f4f7fb;
+	color: #273b52;
+}
+
+.mselect-chip-label {
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.mselect-root .mselect-chip-remove {
+	flex: none;
+	width: 23px;
+	height: 23px;
+	padding: 0;
+	border: 0;
+	border-radius: 3px;
+	background: transparent;
+	color: inherit;
+	font: inherit;
+	font-size: 17px;
+	line-height: 1;
+	cursor: pointer;
+}
+
+.mselect-root .mselect-chip-remove:hover { background: #e4ebf4; }
+
+.mselect-root .mselect-control .mselect-input {
+	flex: 1 1 90px;
+	width: 0;
+	min-width: 72px;
+	min-height: 27px;
+	padding: 3px;
+	border: 0;
+	outline: 0;
+	background: transparent;
+	color: inherit;
+	font: inherit;
+}
+
+.mselect-root .mselect-input::placeholder { color: #666; opacity: 1; }
+.mselect-root .mselect-input::-webkit-search-cancel-button { cursor: pointer; }
+
+.mselect-root .mselect-toggle,
+.mselect-root .mselect-more {
+	appearance: none;
+	border: 1px solid var(--mselect-border);
+	border-radius: 4px;
+	background: #fff;
+	color: #333;
+	font: inherit;
+	cursor: pointer;
+}
+
+.mselect-root .mselect-toggle {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	flex: none;
+	width: 28px;
+	height: 28px;
+	padding: 0;
+}
+
+.mselect-chevron {
+	width: 8px;
+	height: 8px;
+	border-right: 1.5px solid currentColor;
+	border-bottom: 1.5px solid currentColor;
+	transform: translateY(-2px) rotate(45deg);
+}
+
+.mselect-input[aria-expanded="true"] ~ .mselect-toggle .mselect-chevron {
+	transform: translateY(2px) rotate(225deg);
+}
+
+.mselect-root .mselect-toggle:hover,
+.mselect-root .mselect-more:hover { background: #f5f5f5; }
+
+.mselect-root .mselect-toggle:focus-visible,
+.mselect-root .mselect-more:focus-visible,
+.mselect-root .mselect-chip-remove:focus-visible {
+	outline: 2px solid var(--mselect-focus);
+	outline-offset: 2px;
+}
+
+.mselect-popup {
+	position: absolute;
+	z-index: 1000;
+	inset-inline: 0;
+	top: calc(100% + 4px);
+	min-width: 100%;
+	padding: 4px;
+	border: 1px solid #dfdfdf;
+	border-radius: 4px;
+	background: #fff;
+	box-shadow: 0 6px 16px rgb(0 0 0 / 8%);
+}
+
+.mselect-list { max-height: 230px; overflow-y: auto; overscroll-behavior: contain; }
+
+.mselect-option {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	min-height: 31px;
+	padding: 7px 9px;
+	border-radius: 4px;
+	color: #222;
+	cursor: pointer;
+}
+
+.mselect-option:hover,
+.mselect-option-active { background: var(--mselect-active); }
+.mselect-option-active { box-shadow: inset 0 0 0 1px var(--mselect-focus); }
+
+.mselect-option[aria-selected="true"] { font-weight: 600; }
+
+.mselect-option[aria-selected="true"] { position: relative; padding-inline-end: 28px; }
+.mselect-option[aria-selected="true"]::after {
+	content: '✓';
+	position: absolute;
+	inset-inline-end: 9px;
+	top: 7px;
+	color: #375978;
+}
+
+.mselect-option-disabled,
+.mselect-option-disabled:hover {
+	background: transparent;
+	color: #777;
+	cursor: not-allowed;
+	opacity: 0.7;
+}
+
+.mselect-option-description { color: #555; font-size: 11px; font-weight: normal; overflow-wrap: anywhere; }
+
+.mselect-status { padding: 5px 8px; color: #555; font-size: 12px; }
+
+.mselect-root .mselect-more[aria-disabled="true"] { opacity: 0.65; cursor: wait; }
+
+.mselect-root .mselect-more { display: block; width: 100%; min-height: 32px; margin-top: 3px; padding: 5px 8px; text-align: center; }
+
+.mselect-disabled { opacity: 0.65; }
+.mselect-disabled .mselect-control { background: #f5f5f5; }
+
+@media (forced-colors: active) {
+	.mselect-control, .mselect-chip, .mselect-popup, .mselect-toggle, .mselect-more { border: 1px solid CanvasText; }
+	.mselect-option-active { outline: 2px solid Highlight; outline-offset: -2px; }
+	.mselect-control:focus-within, .mselect-toggle:focus-visible, .mselect-more:focus-visible,
+	.mselect-chip-remove:focus-visible { outline: 2px solid Highlight; }
+}
